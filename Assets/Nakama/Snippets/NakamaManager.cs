@@ -94,7 +94,7 @@ namespace Nakama.Snippets
             // Restore session or create a new one.
             var authToken = PlayerPrefs.GetString(SessionPrefName);
             var session = Nakama.Session.Restore(authToken);
-            var expiredDate = DateTime.UtcNow.AddDays(-1);
+            var expiredDate = DateTime.UtcNow;
             if (session == null || session.HasExpired(expiredDate))
             {
                 var sessionTask = AuthenticateAsync();
