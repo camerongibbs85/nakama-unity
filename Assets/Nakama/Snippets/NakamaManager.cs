@@ -59,6 +59,10 @@ namespace Nakama.Snippets
             }
         }
 
+        public static string Scheme {get; set;} = Nakama.Client.DefaultScheme;
+        public static string Host {get; set;} = Nakama.Client.DefaultHost;
+        public static int Port {get; set;} = Nakama.Client.DefaultPort;
+
         public IClient Client { get; }
         public ISocket Socket { get; }
 
@@ -66,7 +70,7 @@ namespace Nakama.Snippets
 
         private NakamaManager()
         {
-            Client = new Client("http", "127.0.0.1", 7350, "defaultkey")
+            Client = new Client(Scheme, Host, Port, "defaultkey")
             {
 #if UNITY_EDITOR
                 Logger = new UnityLogger()
