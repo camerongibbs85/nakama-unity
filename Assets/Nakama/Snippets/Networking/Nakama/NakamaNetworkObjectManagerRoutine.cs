@@ -58,7 +58,7 @@ namespace Nakama.Snippets
 
             for (int i = 0; i < objectCount; i++)
             {
-                objects[i].Destroy();
+                manager.manager.NetworkObjectFunction(() => objects[i].Destroy());
             }
         }
     }
