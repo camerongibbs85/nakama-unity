@@ -33,11 +33,11 @@ public class NetworkObjectManagerTest2 : MonoBehaviour {
         var proxy = actor.CreatePrimitive(PrimitiveType.Cube);
         for (int i = 0; i < INNER; i++)
         {
-            actor.NetworkObjectFunction(() => proxy.SetLocalPosition(Random.onUnitSphere * RADIUS));
+            proxy.SetLocalPosition(Random.onUnitSphere * RADIUS);
             Reflect(actor, reflector);
             await Task.Delay(System.TimeSpan.FromMilliseconds(ACTIONDELAY));
         }
-        actor.NetworkObjectFunction(() => proxy.Destroy());
+        proxy.Destroy();
         Reflect(actor, reflector);
     }
 }

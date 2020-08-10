@@ -50,7 +50,7 @@ public partial class NetworkObjectManager
         gameObject.transform.SetParent(parentTransform);
     
         // wrap it with a network object
-        var creation = NetworkObject.Proxy.Create(gameObject, instanceId);
+        var creation = NetworkObject.Proxy.Create(this, gameObject, instanceId);
 
         // keep track of it
         objects.Add(creation.instanceId, creation.networkObject);
@@ -67,9 +67,8 @@ public partial class NetworkObjectManager
         return creation.proxy;
     }
 
-    public void NetworkObjectFunction(Func<INetworkAction> function)
+    public void NetworkObjectFunction(INetworkAction objectAction)
     {
-        INetworkAction objectAction = function();
         var instanceId = objectAction.Dispatch(this);
         EnqueueObjectAction(instanceId, objectAction);
     }

@@ -1,58 +1,66 @@
 using System.Collections.Generic;
 using System.Threading.Tasks;
 using UnityEngine;
+using UnityEngine.UI;
+
 
 public class NetworkObjectManagerTest : MonoBehaviour {
     private const int INNER = 10;
-    private const int OUTER = 15;
+    private const int OUTER = 10;
     private const int STAGEDELAY = 1;
-    private const int ACTIONDELAY = 200;
+    private const int ACTIONDELAY = 33;
+    private const int RADIUS = 3;
+    public TMPro.TMP_Text ModeLabel;
 
-    private void Enqueue(Queue<byte[]> payloads, NetworkObjectManager manager)
+    private void Enqueue(Queue<byte[]> payloads, NetworkObjectManager recorder)
     {
-        payloads.Enqueue(manager.handler.GetNetworkPayload());
+        payloads.Enqueue(recorder.handler.GetNetworkPayload());
     }
 
-    private void Dequeue(Queue<byte[]> payloads, NetworkObjectManager manager)
+    private void Dequeue(Queue<byte[]> payloads, NetworkObjectManager recorder)
     {
-        manager.handler.HandleNetworkPayload(payloads.Dequeue());
+        recorder.handler.HandleNetworkPayload(payloads.Dequeue());
     }
 
     private async void Start()
     {
         Queue<byte[]> payloads = new Queue<byte[]>();
-        NetworkObjectManager manager = new NetworkObjectManager(transform);
-        NetworkObjectManager manager1 = new NetworkObjectManager(transform);
+        NetworkObjectManager recorder = new NetworkObjectManager(transform);
+        NetworkObjectManager replayer = new NetworkObjectManager(transform);
 
         for (int i = 0; i < OUTER; i++)
         {
-            await Record(payloads, manager);
+            await Record(payloads, recorder);
             await Task.Delay(System.TimeSpan.FromSeconds(STAGEDELAY));
-            await Replay(payloads, manager1);
+            await Replay(payloads, replayer);
             await Task.Delay(System.TimeSpan.FromSeconds(STAGEDELAY));            
         }
+
+        ModeLabel.text = "Done";
     }
 
-    private async Task Replay(Queue<byte[]> payloads, NetworkObjectManager manager1)
-    {
+    private async Task Replay(Queue<byte[]> payloads, NetworkObjectManager replayer)
+    {        
+        ModeLabel.text = "Replay";
         for (int i = 0; i < INNER; i++)
         {
-            Dequeue(payloads, manager1);
+            Dequeue(payloads, replayer);
             await Task.Delay(System.TimeSpan.FromMilliseconds(ACTIONDELAY));
         }
-        Dequeue(payloads, manager1);
+        Dequeue(payloads, replayer);
     }
 
-    private async Task Record(Queue<byte[]> payloads, NetworkObjectManager manager)
+    private async Task Record(Queue<byte[]> payloads, NetworkObjectManager recorder)
     {
-        var proxy = manager.CreatePrimitive(PrimitiveType.Cube);
+        ModeLabel.text = "Record";
+        var proxy = recorder.CreatePrimitive(PrimitiveType.Cube);
         for (int i = 0; i < INNER; i++)
         {
-            manager.NetworkObjectFunction(() => proxy.SetLocalPosition(Random.onUnitSphere * STAGEDELAY));
-            Enqueue(payloads, manager);
+            proxy.SetLocalPosition(Random.onUnitSphere * RADIUS);
+            Enqueue(payloads, recorder);
             await Task.Delay(System.TimeSpan.FromMilliseconds(ACTIONDELAY));
         }
-        manager.NetworkObjectFunction(() => proxy.Destroy());
-        Enqueue(payloads, manager);
+        proxy.Destroy();
+        Enqueue(payloads, recorder);
     }
 }

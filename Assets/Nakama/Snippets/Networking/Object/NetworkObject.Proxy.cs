@@ -5,10 +5,10 @@ public partial class NetworkObject
     public class Proxy
     {
         public const int NullInstanceId = int.MinValue;
-        public static (int instanceId, NetworkObject networkObject, Proxy proxy) Create(GameObject gameObject, int instanceId = NullInstanceId)
+        public static (int instanceId, NetworkObject networkObject, Proxy proxy) Create(NetworkObjectManager networkObjectManager, GameObject gameObject, int instanceId = NullInstanceId)
         {
             var newId = instanceId == int.MinValue ? gameObject.GetInstanceID() : instanceId;
-            var networkObject = new NetworkObject(newId, gameObject);
+            var networkObject = new NetworkObject(newId, gameObject, networkObjectManager);
             var proxy = new Proxy(networkObject);
             return (newId, networkObject, proxy);
         }
@@ -18,14 +18,14 @@ public partial class NetworkObject
             this.networkObject = networkObject;
         }
 
-        public INetworkAction SetLocalPosition(Vector3 position)
+        public void SetLocalPosition(Vector3 position)
         {
-            return NetworkObjectManager.PositionAction.Create(networkObject.instanceId, networkObject, position);
+            networkObject.networkObjectManager.NetworkObjectFunction(NetworkObjectManager.PositionAction.Create(networkObject.instanceId, networkObject, position));
         }
 
-        public INetworkAction Destroy()
+        public void Destroy()
         {
-            return NetworkObjectManager.DestroyAction.Create(networkObject.instanceId, networkObject);
+            networkObject.networkObjectManager.NetworkObjectFunction(NetworkObjectManager.DestroyAction.Create(networkObject.instanceId, networkObject));
         }
     }
 }

@@ -133,7 +133,7 @@ GameObject:
   - component: {fileID: 423529410}
   - component: {fileID: 423529412}
   m_Layer: 0
-  m_Name: NakamaNetworkObjectManager
+  m_Name: NakamaNetworkObjectManagerWithRoutine
   m_TagString: Untagged
   m_Icon: {fileID: 0}
   m_NavMeshLayer: 0
@@ -180,8 +180,8 @@ MonoBehaviour:
   m_EditorClassIdentifier: 
   Looping: 1
   Running: 1
-  ObjectLimit: 100
-  Moves: 60
+  ObjectLimit: 300
+  Moves: 6
   movePerionMs: 33
 --- !u!1 &523959360
 GameObject:

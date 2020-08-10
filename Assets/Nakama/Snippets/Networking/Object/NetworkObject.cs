@@ -3,10 +3,12 @@ using UnityEngine;
 public partial class NetworkObject
 {
     public const int NullInstanceId = int.MinValue;
+    private readonly NetworkObjectManager networkObjectManager;
     private readonly GameObject gameObject;
     private readonly int instanceId;
-    private NetworkObject(int instanceId, GameObject gameObject)
+    private NetworkObject(int instanceId, GameObject gameObject, NetworkObjectManager networkObjectManager)
     {
+        this.networkObjectManager = networkObjectManager;
         this.gameObject = gameObject;
         this.instanceId = instanceId;
     }
