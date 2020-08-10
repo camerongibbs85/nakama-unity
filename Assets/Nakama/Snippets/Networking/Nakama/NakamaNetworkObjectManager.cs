@@ -123,6 +123,7 @@ namespace Nakama.Snippets
 
         void ReceivedMatchState(IMatchState state)
         {
+            Debug.Log($"Received match state {state.UserPresence.UserId}");
             lock (Lock)
             {
                 payloads.Enqueue(state.State);

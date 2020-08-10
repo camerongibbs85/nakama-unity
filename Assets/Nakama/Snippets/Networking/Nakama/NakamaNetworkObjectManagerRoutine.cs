@@ -49,7 +49,7 @@ namespace Nakama.Snippets
                 {
                     for (int j = 0; j < objectCount; j++)
                     {
-                        Vector3 position =  Random.onUnitSphere * 3;
+                        Vector3 position = Random.onUnitSphere * 3;
                         manager.manager.NetworkObjectFunction(() => objects[j].SetLocalPosition(position));
                     }
                     await Task.Delay(System.TimeSpan.FromMilliseconds(movePerionMs));

@@ -55,9 +55,13 @@ public partial class NetworkObjectManager
         // keep track of it
         objects.Add(creation.instanceId, creation.networkObject);
 
-        // create a network action to record it's creation (that will get serialised into the stream with other object actions)
-        INetworkAction objectAction = CreatePrimitiveAction.Create(creation.instanceId, creation.networkObject, type);
-        EnqueueObjectAction(creation.instanceId, objectAction);
+        if(instanceId == NetworkObject.NullInstanceId)
+        {
+            // if this object was created locally, it won't have an instanceId until it is created
+            // create a network action to record it's creation (that will get serialised into the stream with other object actions)
+            INetworkAction objectAction = CreatePrimitiveAction.Create(creation.instanceId, creation.networkObject, type);
+            EnqueueObjectAction(creation.instanceId, objectAction);
+        }
 
         // return the proxy (so that users can't directly manipulate the object. Instead they use its proxy that will manipulate the object through network actions)
         return creation.proxy;
