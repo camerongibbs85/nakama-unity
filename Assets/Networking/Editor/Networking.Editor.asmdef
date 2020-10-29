@@ -1,0 +1,17 @@
+{
+    "name": "Networking.Editor",
+    "references": [
+        "GUID:3ff672a3b074e2e4fb3f58b8c8a4422b"
+    ],
+    "includePlatforms": [
+        "Editor"
+    ],
+    "excludePlatforms": [],
+    "allowUnsafeCode": false,
+    "overrideReferences": false,
+    "precompiledReferences": [],
+    "autoReferenced": true,
+    "defineConstraints": [],
+    "versionDefines": [],
+    "noEngineReferences": false
+}

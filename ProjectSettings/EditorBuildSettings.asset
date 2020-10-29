@@ -5,10 +5,16 @@ EditorBuildSettings:
   m_ObjectHideFlags: 0
   serializedVersion: 2
   m_Scenes:
-  - enabled: 1
-    path: Assets/Scenes/WebGL.unity
+  - enabled: 0
+    path: Assets/Nakama/Scenes/WebGL.unity
     guid: e38e939f366484dbc8e08deaf6c5978b
   - enabled: 0
-    path: Assets/Scenes/SampleScene.unity
+    path: Assets/Nakama/Scenes/SampleScene.unity
     guid: 9c0ce5994ac4b4970ab7e47eeed0b1f6
+  - enabled: 0
+    path: Assets/Networking.Tests/Test5/Test5.unity
+    guid: 96e16fcaee7844b44879f2194387a67b
+  - enabled: 1
+    path: Assets/Networking/Scenes/WithoutRoutine.unity
+    guid: 05c66d395cc134d43b8d263bcf57cd46
   m_configObjects: {}

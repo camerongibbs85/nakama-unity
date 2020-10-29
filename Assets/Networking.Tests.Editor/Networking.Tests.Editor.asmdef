@@ -1,0 +1,18 @@
+{
+    "name": "Networking.Tests.Editor",
+    "references": [
+        "GUID:530ee741b33ef604aa44cbff6ce545b6",
+        "GUID:3ff672a3b074e2e4fb3f58b8c8a4422b"
+    ],
+    "includePlatforms": [
+        "Editor"
+    ],
+    "excludePlatforms": [],
+    "allowUnsafeCode": false,
+    "overrideReferences": false,
+    "precompiledReferences": [],
+    "autoReferenced": true,
+    "defineConstraints": [],
+    "versionDefines": [],
+    "noEngineReferences": false
+}

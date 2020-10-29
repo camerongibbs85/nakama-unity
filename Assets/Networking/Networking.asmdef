@@ -1,0 +1,15 @@
+{
+    "name": "Networking",
+    "references": [
+        "GUID:b0dbf610a2067864eadbd1250ee01ff3"
+    ],
+    "includePlatforms": [],
+    "excludePlatforms": [],
+    "allowUnsafeCode": false,
+    "overrideReferences": false,
+    "precompiledReferences": [],
+    "autoReferenced": true,
+    "defineConstraints": [],
+    "versionDefines": [],
+    "noEngineReferences": false
+}
